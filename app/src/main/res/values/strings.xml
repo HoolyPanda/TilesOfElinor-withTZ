@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">TilesOfElinorwithTZ</string>
+    <string-array name="districts">
+        <item>Ito Empire</item>
+    </string-array>
+    <string-array name="itoempire">
+        <item>
+            ToSho Ass
+        </item>>
+    </string-array>
+    <string-array name="toshoass">
+        <item>Это задница ТоШо. Она размером с задницу ТоШо. Она глубока как задница ТоШо. В ней темно прямо как в заднице ТоШо. Это задница ТоШо</item>
+        <item>Необходимо крикнуть, как сильно ты любишь кодекс</item>>
+        <item>"Я ОЧЕНЬ СИЛЬНО ЛЮБЛЮ КОДЕКС!!"</item>
+    </string-array>
+
+    <string-array name="toshoassencounters">
+        <item>Firetrap</item>
+        <item>Ass Itself</item>
+    </string-array>
+    <string-array name="toshoassencountersdiscr">
+        <item>Это огненная ловушка</item>
+        <item>Это сама Задница ТоШо</item>
+    </string-array >
+
+</resources>
