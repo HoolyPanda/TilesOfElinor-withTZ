@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 /**
@@ -24,7 +25,9 @@ public class MapViewer extends Activity  {
         String res= MainActivity.district;
         FloatingActionButton fab2= findViewById(R.id.floatingActionButton3);
         String file= "file:///android_asset/" + res+".html";
+       // Map.getSettings().setLoadWithOverviewMode(true);
         Map.getSettings().setSupportZoom(true);
+        Map.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
         Map.getSettings().setBuiltInZoomControls(true);
        // Map.getSettings().supportZoom();
         Map.loadUrl(file);
