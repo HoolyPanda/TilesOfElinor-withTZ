@@ -1,6 +1,7 @@
 package com.bignerdranch.android.tilesofelinorwithtz;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,43 +10,42 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-static String district;
+ static String path ="Dungeons";
+ static String s= path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView Districts= findViewById(R.id.Districts);
-        String[] DistrictList = getResources().getStringArray(R.array.districts);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,  android.R.layout.simple_list_item_1, DistrictList);
 
+        ListView list = findViewById(R.id.Districts);
+        AssetManager am =getApplicationContext().getAssets();
 
-        FloatingActionButton Map= findViewById(R.id.abb) ;
-        Map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               district = "elinormap";
-                Intent intent= new Intent(MainActivity.this , MapViewer .class );
-                startActivity(intent);
-            }
-        });
+        try {
+            String[] Files = am.list(path);
+            final ArrayAdapter ar =  new ArrayAdapter(this, android.R.layout.simple_list_item_1,Files) ;
+            list.setAdapter(ar);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    TextView txt= (TextView) view;
+                    s = path+ "/"+txt.getText().toString();
+                    if(s.equals("Dungeons/Старый Холм")){Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG ).show();}
 
-        Districts.setAdapter(adapter);
-        Main(Districts);
+                   Intent intent = new Intent(MainActivity .this, DungeonSelect.class);
+                    startActivity(intent);
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
- void Main(ListView districts){
-     districts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-         @Override
-         public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-             TextView tv = (TextView) itemClicked ;
-             district = tv.getText().toString();
-             district = district.toLowerCase();
-             district = district.replace(" ","");
-             Intent intent = new Intent(MainActivity.this, DungeonSelect.class);
-             startActivity(intent);
-         }
-     });
- }
+
 }

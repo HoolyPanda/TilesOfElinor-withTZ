@@ -15,7 +15,7 @@ import android.widget.TextView;
  */
 
 public class EncounterList extends Activity  {
-   static  String encounterlist = DungeonSelect.dungeon;
+   static  String encounterlist = DungeonSelect.path;
     String encounter;
    static  int i;
     @Override
@@ -37,7 +37,7 @@ public class EncounterList extends Activity  {
         encounters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
-                 i= position ;
+                i= position ;
                 TextView tv = (TextView) itemClicked ;
                 encounter  = tv.getText().toString();
                 encounter  = encounter.toLowerCase();

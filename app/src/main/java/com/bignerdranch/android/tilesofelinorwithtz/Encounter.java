@@ -14,7 +14,7 @@ public class Encounter extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.encounterdiscription);
         TextView discription= findViewById(R.id.textView3);
-        int path =getResources().getIdentifier( EncounterList.encounterlist +"discr","array",getPackageName()) ;
+        int path = getResources().getIdentifier( EncounterList.encounterlist +"discr","array",getPackageName()) ;
         String [] discriptions= getResources().getStringArray(path);
         discription.setText(discriptions[EncounterList.i] );
 

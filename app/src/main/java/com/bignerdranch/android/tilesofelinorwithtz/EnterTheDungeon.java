@@ -20,7 +20,7 @@ import static android.view.DragEvent.ACTION_DRAG_STARTED;
  */
 
 public class EnterTheDungeon extends Activity  {
-    static String path1= DungeonSelect.dungeon;
+    static String path1= DungeonSelect.path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class EnterTheDungeon extends Activity  {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 MainActivity.district= path1;
+                 MainActivity.path= path1;
                 Intent intent= new Intent(EnterTheDungeon.this , MapViewer .class );
                 startActivity(intent);
             }

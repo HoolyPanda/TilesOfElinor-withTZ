@@ -1,7 +1,6 @@
 package com.bignerdranch.android.tilesofelinorwithtz;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,10 +20,10 @@ public class MapViewer extends Activity  {
        // Fragment fr1= findViewById(R.id.map);
 
 
-        WebView Map= findViewById(R.id.map);//"file:///android_asset/" + res+".html"
-        String res= MainActivity.district;
+        WebView Map= findViewById(R.id.map);//"file:///android_asset/Maps/" + res+".html"
+        String res= MainActivity.path;
         FloatingActionButton fab2= findViewById(R.id.floatingActionButton3);
-        String file= "file:///android_asset/" + res+".html";
+        String file= "file:///android_asset/Maps/" + res+".html";
        // Map.getSettings().setLoadWithOverviewMode(true);
         Map.getSettings().setSupportZoom(true);
         Map.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);

@@ -21,6 +21,7 @@
         <activity android:name=".EnterTheDungeon" ></activity>
         <activity android:name=".EncounterList" ></activity>
         <activity android:name=".Encounter" ></activity>
+        <activity android:name=".Test" ></activity>
     </application>
 
 </manifest>
