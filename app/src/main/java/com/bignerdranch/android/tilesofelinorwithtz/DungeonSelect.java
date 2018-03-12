@@ -19,28 +19,27 @@ import java.io.IOException;
  */
 
 public class DungeonSelect extends Activity  {
-   static  String path = MainActivity.s;
-   static String s = path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dungoselect); //MainActivity.district
-
+        setContentView(R.layout.dungoselect);
         ListView list = findViewById(R.id.list1);
         AssetManager am =getApplicationContext().getAssets();
 
         try {
-            String[] Files = am.list(path);
-            final ArrayAdapter ar =  new ArrayAdapter(this, android.R.layout.simple_list_item_1,Files) ;
+            String[] Files = am.list( getIntent().getStringExtra("newpath"));
+            ArrayAdapter ar =  new ArrayAdapter(this, android.R.layout.simple_list_item_1,Files) ;
             list.setAdapter(ar);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String path = getIntent().getStringExtra("newpath");
                     TextView txt= (TextView) view;
-                    path= path+ "/"+txt.getText().toString();
-                    if(path.equals("Dungeons/Старый Холм/Зал Костей 1")){Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG ).show();}
-                   // Intent intent = new Intent(MainActivity .this, DungeonSelect.class);
-                    //startActivity(intent);
+                     String s= path+ "/"+txt.getText().toString();
+                    if(s.equals("Dungeons/43 Старый Холм/Зал Костей 1")){Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG ).show();}
+                    Intent intent = new Intent(DungeonSelect .this, EnterTheDungeon.class);
+                    intent.putExtra("newpath1",s);
+                    startActivity(intent);
                 }
             });
 

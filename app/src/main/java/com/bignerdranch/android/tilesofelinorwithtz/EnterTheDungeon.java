@@ -2,9 +2,11 @@ package com.bignerdranch.android.tilesofelinorwithtz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.text.method.ScrollingMovementMethod;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import static android.view.DragEvent.ACTION_DRAG_STARTED;
 
 /**
@@ -20,45 +28,108 @@ import static android.view.DragEvent.ACTION_DRAG_STARTED;
  */
 
 public class EnterTheDungeon extends Activity  {
-    static String path1= DungeonSelect.path;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterthedungeon);
         TextView MainDiscription, ToEnter;
-       MainDiscription = findViewById(R.id.textView);
-       ToEnter = findViewById(R.id.textView2);
-        Main(MainDiscription , ToEnter );
-    }
-    void Main (TextView  MainDiscription, TextView ToEnter){
-       // TextView MainDiscription, ToEnter;
+        MainDiscription = findViewById(R.id.textView);
+        ToEnter = findViewById(R.id.textView2);
+        InputStream input;
+        AssetManager am = getApplicationContext().getAssets();
         Button button= findViewById(R.id.button);
-        ConstraintLayout back =findViewById(R.id.background);
-
         FloatingActionButton fab= findViewById(R.id.floatingActionButton2);
-
-        path1= path1.toLowerCase();
-        path1= path1.replace(" ","");
-        int path= getResources().getIdentifier(path1,"array",getPackageName()) ;
-
-        final String[] dungeondescription= getResources().getStringArray(path);
-        MainDiscription.setText(dungeondescription[0]);
-        ToEnter.setText(dungeondescription[1]);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 MainActivity.path= path1;
-                Intent intent= new Intent(EnterTheDungeon.this , MapViewer .class );
-                startActivity(intent);
+                try{
+
+                    setContentView(R.layout.dascript);
+                    InputStream input;
+                    String path = getIntent().getStringExtra("newpath1");
+                    String s1= path;
+                    TextView  Script = findViewById(R.id.script);
+                    AssetManager am = getApplicationContext().getAssets();
+
+                    input =am.open(s1+"/script.txt") ;
+                    int size = input.available();
+                    byte[] buffer = new byte[size];
+                    input.read(buffer);
+                    input.close();
+                    String str_data = new String(buffer, "UTF-8");
+                    Script.setMovementMethod(new ScrollingMovementMethod());
+                    Script.setText(str_data);
+
+                    Button button= findViewById(R.id.button2);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String path = getIntent().getStringExtra("newpath1");
+                            Intent intent = new Intent(EnterTheDungeon .this, MapViewer.class);
+                            intent.putExtra("path",path);
+                            startActivity(intent);
+                        }
+                    });
+
+                }catch (IOException e){
+                    String path = getIntent().getStringExtra("newpath1");
+                    Toast.makeText(EnterTheDungeon.this, "Для этого подземельня нет сценария", Toast.LENGTH_LONG ).show();
+                    Intent intent = new Intent(EnterTheDungeon .this, MapViewer.class);
+                    intent.putExtra("path",path);
+                    startActivity(intent);
+                }
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
+       fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), dungeondescription[2], Toast.LENGTH_LONG ).show();
+                try{
+                    String path = getIntent().getStringExtra("newpath1");
+                    InputStream input;
+                    String s1= path;
+                    AssetManager am = getApplicationContext().getAssets();
+                    input =am.open(s1+"/answer.txt") ;
+                    int size = input.available();
+                    byte[] buffer = new byte[size];
+                    input.read(buffer);
+                    input.close();
+                    String str_data = new String(buffer, "UTF-8");
+                    Toast.makeText(EnterTheDungeon.this, str_data, Toast.LENGTH_LONG ).show();
+                }catch (IOException e){
+                    Toast.makeText(EnterTheDungeon.this, "str_data", Toast.LENGTH_SHORT );
+                }
             }
         });
+        //выводим описание
+        try{
+            String path = getIntent().getStringExtra("newpath1");
+            String s= path;
+            input =am.open(s+"/description.txt") ;
+            int size = input.available();
+            byte[] buffer = new byte[size];
+            input.read(buffer);
+            input.close();
+            String str_data = new String(buffer, "UTF-8");
+            MainDiscription.setMovementMethod(new ScrollingMovementMethod());
+            MainDiscription.setText(str_data);
+        }catch (IOException e){}
+        //выводим экнтранс
+        try{
+            String path = getIntent().getStringExtra("newpath1");
+            String s= path;
+            input =am.open(s+"/entrance.txt") ;
+            int size = input.available();
+            byte[] buffer = new byte[size];
+            input.read(buffer);
+            input.close();
 
 
+            String str_data = new String(buffer, "UTF-8");
+            ToEnter.setMovementMethod(new ScrollingMovementMethod());
+            ToEnter.setText(str_data);
+             }
+            catch(IOException e){}
     }
+
 }

@@ -15,7 +15,7 @@ import android.widget.TextView;
  */
 
 public class EncounterList extends Activity  {
-   static  String encounterlist = DungeonSelect.path;
+   static  String encounterlist =null;// DungeonSelect.path;
     String encounter;
    static  int i;
     @Override

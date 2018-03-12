@@ -16,27 +16,38 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
  static String path ="Dungeons";
- static String s= path;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ListView list = findViewById(R.id.Districts);
         AssetManager am =getApplicationContext().getAssets();
+        FloatingActionButton fab = findViewById(R.id.abb);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity .this, MapViewer.class);
+               intent.putExtra("path", path);
+                startActivity(intent);
+            }
+        });
 
         try {
+
             String[] Files = am.list(path);
             final ArrayAdapter ar =  new ArrayAdapter(this, android.R.layout.simple_list_item_1,Files) ;
             list.setAdapter(ar);
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    TextView txt= (TextView) view;
-                    s = path+ "/"+txt.getText().toString();
-                    if(s.equals("Dungeons/Старый Холм")){Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG ).show();}
 
+                    TextView txt= (TextView) view;
+                   String s = path+ "/"+txt.getText().toString();
+                    Toast.makeText(MainActivity.this ,s,Toast.LENGTH_SHORT);
                    Intent intent = new Intent(MainActivity .this, DungeonSelect.class);
+                    intent.putExtra("newpath",s);
                     startActivity(intent);
                 }
             });
