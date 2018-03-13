@@ -26,6 +26,9 @@ public class DungeonSelect extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dungoselect);
+        TextView label=findViewById(R.id.textView4);
+        label.setText("Список Подземелий");
+        Toast.makeText(getApplicationContext(),"Обязательно уточняйте текущее состояние подземелья у Мастера Подземелий", Toast.LENGTH_LONG ).show();
         ListView list = findViewById(R.id.list1);
         FloatingActionButton fab= findViewById(R.id.fab1);
         fab.setVisibility(View.INVISIBLE);

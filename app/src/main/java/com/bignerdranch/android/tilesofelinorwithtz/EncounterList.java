@@ -26,6 +26,8 @@ public class EncounterList extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dungoselect);
         FloatingActionButton fab=findViewById(R.id.fab1);
+        TextView label=findViewById(R.id.textView4);
+        label.setText("Список Событий");
         AssetManager am =getApplicationContext().getAssets();
         ListView list1 = findViewById(R.id.list1);//"Dungeons/43 Старый Холм/Encounters"
 

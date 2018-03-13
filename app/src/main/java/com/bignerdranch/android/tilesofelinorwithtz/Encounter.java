@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.pm.ActivityInfo;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +26,13 @@ public class Encounter extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.encounterdiscription);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         final AssetManager am =getApplicationContext().getAssets();
         //ListView list1 = findViewById(R.id.l1);
        final TextView text= findViewById(R.id.textView3);
+       final TextView label = findViewById(R.id.textView5);
         InputStream input;
+        label.setText("Описание События");
 
         final String p= getIntent().getStringExtra("newpath");
         String[] RawFiles = new String[0];
@@ -63,6 +67,8 @@ public class Encounter extends Activity  {
             check.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    label.setText("Описание Развилки");
+                    check.setVisibility(View.INVISIBLE);
 
                     String a0= p+"/"+Files[0]+"";
                     String a1= p+"/"+Files[1]+"";

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.content.pm.ActivityInfo;
 import android.widget.Toast;
 
 import java.io.File;
@@ -33,6 +34,7 @@ public class EnterTheDungeon extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterthedungeon);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         TextView MainDiscription, ToEnter;
         MainDiscription = findViewById(R.id.textView);
         ToEnter = findViewById(R.id.textView2);
