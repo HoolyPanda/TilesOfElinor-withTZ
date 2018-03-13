@@ -21,7 +21,7 @@ public class MapViewer extends Activity  {
         setContentView(R.layout.mapviewer);
         WebView Map= findViewById(R.id.map);
         String res = getIntent().getStringExtra("path");
-        Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG ).show() ;
+        //Toast.makeText(getApplicationContext(),res,Toast.LENGTH_LONG ).show() ;
         FloatingActionButton fab2= findViewById(R.id.floatingActionButton3);
         String file= "file:///android_asset/"+res+"/map.html";
         Map.getSettings().setSupportZoom(true);

@@ -23,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ListView list = findViewById(R.id.Districts);
+
         AssetManager am =getApplicationContext().getAssets();
+
         FloatingActionButton fab = findViewById(R.id.abb);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
                     TextView txt= (TextView) view;
                    String s = path+ "/"+txt.getText().toString();
-                    Toast.makeText(MainActivity.this ,s,Toast.LENGTH_SHORT);
+                  //  Toast.makeText(MainActivity.this ,s,Toast.LENGTH_SHORT);
                    Intent intent = new Intent(MainActivity .this, DungeonSelect.class);
                     intent.putExtra("newpath",s);
+                    //intent.putExtra("newpath1",s+"1234");
                     startActivity(intent);
                 }
             });
